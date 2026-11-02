@@ -1,8 +1,8 @@
 "use client";
 
-import { BarChart3, Check, Clipboard, Download, FileJson, RotateCcw, Send, Sparkles, TrendingDown, TrendingUp } from "lucide-react";
+import { Award, BarChart3, Check, Clipboard, Download, FileJson, LockKeyhole, MessageCircleWarning, RotateCcw, Send, ShieldAlert, Sparkles, TrendingDown, TrendingUp, UserRoundCheck } from "lucide-react";
 import { useState } from "react";
-import { categories } from "@/data/content";
+import { categories, challenges } from "@/data/content";
 import { categoryResults, challengeScore, makeCsv, makeExport, makeSummary, scoreAnswers } from "@/lib/evaluation";
 import { downloadFile } from "@/lib/storage";
 import { postQuestions, preQuestions } from "@/data/content";
@@ -15,6 +15,13 @@ const perceptionQuestions: { key: keyof PerceptionAnswers; label: string }[] = [
   { key: "interest", label: "La experiencia resultó interesante" },
 ];
 
+const badges = [
+  { label: "Radar antifraude", detail: "Phishing", icon: ShieldAlert },
+  { label: "Guardián de claves", detail: "Contraseñas", icon: LockKeyhole },
+  { label: "Mente alerta", detail: "Ingeniería social", icon: MessageCircleWarning },
+  { label: "Custodio de datos", detail: "Información personal", icon: UserRoundCheck },
+];
+
 export function Results({ state, onPerception, onReset }: { state: SessionState; onPerception: (value: PerceptionAnswers) => void; onReset: () => void }) {
   const [copied, setCopied] = useState(false);
   const pre = scoreAnswers(preQuestions, state.preAnswers);
@@ -22,6 +29,7 @@ export function Results({ state, onPerception, onReset }: { state: SessionState;
   const difference = post - pre;
   const byCategory = categoryResults(state.preAnswers, state.postAnswers);
   const gameScore = challengeScore(state);
+  const gameMaximum = challenges.length * 100;
   const stamp = state.participantId.toLowerCase();
   const Trend = difference >= 0 ? TrendingUp : TrendingDown;
 
@@ -38,12 +46,14 @@ export function Results({ state, onPerception, onReset }: { state: SessionState;
     <div className="score-grid">
       <article className="score-card"><span>Pre-test</span><strong>{pre}<small>/12</small></strong><Progress value={(pre / 12) * 100} /><p>{Math.round((pre / 12) * 100)}% de respuestas correctas</p></article>
       <article className="score-card accent"><span>Post-test</span><strong>{post}<small>/12</small></strong><Progress value={(post / 12) * 100} /><p>{Math.round((post / 12) * 100)}% de respuestas correctas</p></article>
-      <article className="score-card game"><span>Puntos de desafíos</span><strong>{gameScore}<small>/800</small></strong><Progress value={(gameScore / 800) * 100} /><p>Puntaje gamificado independiente</p></article>
+      <article className="score-card game"><span>Puntos de desafíos</span><strong>{gameScore}<small>/{gameMaximum}</small></strong><Progress value={(gameScore / gameMaximum) * 100} /><p>Puntaje gamificado independiente</p></article>
     </div>
 
     <section className="panel results-panel"><div className="section-title"><BarChart3 /><div><h2>Desempeño por categoría</h2><p>Aciertos sobre 3 preguntas en cada medición.</p></div></div>
       <div className="category-results">{byCategory.map((result) => <div className="category-row" key={result.category}><strong>{categories[result.category].label}</strong><div className="mini-bars"><div><span>Pre {result.preCorrect}/3</span><Progress value={(result.preCorrect / 3) * 100} /></div><div><span>Post {result.postCorrect}/3</span><Progress value={(result.postCorrect / 3) * 100} /></div></div></div>)}</div>
     </section>
+
+    <section className="panel badge-panel"><div className="section-title"><Award /><div><h2>Insignias de misión</h2><p>Una por cada nivel educativo completado.</p></div></div><div className="badge-grid">{badges.map(({ label, detail, icon: Icon }) => <article key={label}><span><Icon /></span><div><strong>{label}</strong><small>{detail}</small></div><Check /></article>)}</div></section>
 
     <section className="panel perception-panel"><div className="section-title"><Sparkles /><div><h2>Tu percepción <span>Opcional</span></h2><p>Valorá cada afirmación del 1 (muy en desacuerdo) al 5 (muy de acuerdo).</p></div></div>
       <div className="rating-list">{perceptionQuestions.map((question) => <div className="rating-row" key={question.key}><strong>{question.label}</strong><div className="rating-buttons" role="group" aria-label={question.label}>{[1,2,3,4,5].map((value) => <button key={value} className={state.perception[question.key] === value ? "active" : ""} onClick={() => onPerception({ ...state.perception, [question.key]: value })}>{value}</button>)}</div></div>)}</div>

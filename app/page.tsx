@@ -45,12 +45,12 @@ function Welcome({ onStart }: { onStart: () => void }) {
     <header className="landing-nav"><Brand /><span className="academic-pill">Proyecto universitario · PoC</span></header>
     <section className="hero">
       <div className="hero-copy"><span className="eyebrow"><Fingerprint size={16} /> Aprendé a decidir con confianza</span><h1>Tu seguridad digital empieza con una <em>buena decisión.</em></h1><p>Una experiencia breve y gamificada para reconocer riesgos cotidianos, practicar respuestas seguras y observar tu propio desempeño.</p>
-        <div className="hero-actions"><button className="primary-button hero-button" onClick={onStart}>Comenzar experiencia <ArrowRight /></button><span><Clock3 /> 10–15 minutos</span></div>
+        <div className="hero-actions"><button className="primary-button hero-button" onClick={onStart}>Comenzar experiencia <ArrowRight /></button><span><Clock3 /> 15–20 minutos</span></div>
         <div className="privacy-note"><Eye /><p><strong>Sin datos personales.</strong> No pedimos nombre, correo ni documento.</p></div>
       </div>
       <div className="hero-visual" aria-label="Vista previa del recorrido"><div className="glow" /><div className="mission-preview"><div className="preview-top"><span>Tu recorrido</span><strong>0 / 4 niveles</strong></div><div className="preview-ring"><ShieldCheck /><span>LISTO PARA<br/><strong>EMPEZAR</strong></span></div><div className="preview-levels">{cards.map(({ key, icon: Icon }, i) => <div key={key}><span><Icon /></span><small>0{i + 1}</small><strong>{categories[key].shortLabel}</strong></div>)}</div></div></div>
     </section>
-    <section className="topics"><div className="section-kicker">4 niveles · 8 desafíos</div><h2>Situaciones reales. Decisiones más seguras.</h2><div className="topic-grid">{cards.map(({ key, icon: Icon }, i) => <article key={key}><span>0{i + 1}</span><Icon/><div><h3>{categories[key].label}</h3><p>{categories[key].description}</p></div></article>)}</div></section>
+    <section className="topics"><div className="section-kicker">4 niveles · 12 desafíos · 4 insignias</div><h2>Situaciones reales. Decisiones más seguras.</h2><div className="topic-grid">{cards.map(({ key, icon: Icon }, i) => <article key={key}><span>0{i + 1}</span><Icon/><div><h3>{categories[key].label}</h3><p>{categories[key].description}</p></div></article>)}</div></section>
   </main>;
 }
 
