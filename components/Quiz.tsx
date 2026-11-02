@@ -13,7 +13,7 @@ export function Quiz({ kind, questions, initialAnswers, onComplete }: { kind: "p
   const selected = answers[question.id];
   const isLast = index === questions.length - 1;
   const title = kind === "pre" ? "Evaluación inicial" : "Evaluación final";
-  const subtitle = kind === "pre" ? "Respondé según lo que harías hoy. No se mostrará la corrección durante la evaluación." : "Aplicá lo aprendido. La corrección se mostrará cuando termines.";
+  const subtitle = kind === "pre" ? "Respondé según lo que harías hoy. Algunas opciones son deliberadamente parecidas; elegí la más segura." : "Aplicá lo aprendido y elegí la alternativa más segura, no solo una posible. La corrección se mostrará al terminar.";
 
   function choose(option: Option["id"]) { setAnswers((current) => ({ ...current, [question.id]: option })); }
   function next() {
@@ -29,7 +29,7 @@ export function Quiz({ kind, questions, initialAnswers, onComplete }: { kind: "p
       <h2>{question.prompt}</h2>
       <div className="options">{question.options.map((option) => <OptionCard key={option.id} letter={option.id} text={option.text} selected={selected === option.id} onClick={() => choose(option.id)} />)}</div>
     </section>
-    <div className="actions split"><span className="helper-text">Seleccioná una opción para continuar.</span><button className="primary-button" disabled={!selected} onClick={next}>{isLast ? "Finalizar evaluación" : "Continuar"}<ArrowRight size={18} /></button></div>
+    <div className="actions split"><span className="helper-text">Dificultad avanzada · Buscá la opción más segura.</span><button className="primary-button" disabled={!selected} onClick={next}>{isLast ? "Finalizar evaluación" : "Continuar"}<ArrowRight size={18} /></button></div>
   </Shell>;
 }
 

@@ -62,7 +62,7 @@ export function Challenges({ state, onSave, onComplete }: { state: SessionState;
     </Shell>;
   }
 
-  return <Shell eyebrow="Paso 3 de 5" title="Misiones de seguridad" subtitle="Tomá una decisión y recibí retroalimentación inmediata. Podés aprender incluso si te equivocás.">
+  return <Shell eyebrow="Paso 3 de 5 · Dificultad avanzada" title="Misiones de seguridad" subtitle="Las señales son más sutiles y varias respuestas pueden parecer razonables. Elegí siempre la alternativa más segura.">
     <div className="game-hud">
       <div className="points"><Trophy size={18} /> <strong>{points}</strong><span>puntos</span></div>
       <div className={`streak ${streaks.current >= 2 ? "hot" : ""}`}><Flame size={18} /><strong>{streaks.current}</strong><span>racha</span></div>

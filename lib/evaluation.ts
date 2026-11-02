@@ -27,7 +27,7 @@ export function makeExport(state: SessionState) {
   const postScore = scoreAnswers(postQuestions, state.postAnswers);
   return {
     schemaVersion: "1.0",
-    instrumentVersion: "POC-SD-2026-02",
+    instrumentVersion: "POC-SD-2026-03",
     participantId: state.participantId,
     timestamps: { startedAt: state.startedAt, completedAt: state.completedAt },
     consented: state.consented,

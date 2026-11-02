@@ -1,11 +1,11 @@
 import type { SessionState } from "@/types";
 
-export const STORAGE_KEY = "seguridad-digital-poc-session-v2";
+export const STORAGE_KEY = "seguridad-digital-poc-session-v3";
 
 export function createSession(): SessionState {
   return {
     participantId: `SD-${crypto.randomUUID().slice(0, 8).toUpperCase()}`,
-    instrumentVersion: "POC-SD-2026-02",
+    instrumentVersion: "POC-SD-2026-03",
     startedAt: new Date().toISOString(),
     completedAt: null,
     stage: "welcome",

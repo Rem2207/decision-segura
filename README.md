@@ -69,7 +69,7 @@ La salida estática se genera en `out/`.
 
 No se recopilan nombres, correos, documentos ni credenciales. El identificador de sesión es aleatorio. Los datos permanecen en el navegador hasta que la persona los exporta o reinicia la experiencia; `localStorage` no es una base de datos centralizada.
 
-El JSON exportado utiliza el esquema `1.0` y la versión de instrumento `POC-SD-2026-02`. Incluye identificador, fechas, respuestas individuales, corrección, métricas por categoría, puntaje de desafíos y percepción opcional.
+El JSON exportado utiliza el esquema `1.0` y la versión de instrumento `POC-SD-2026-03`. Esta revisión eleva la dificultad con distractores plausibles, señales mixtas y decisiones de prioridad. Incluye identificador, fechas, respuestas individuales, corrección, métricas por categoría, puntaje de desafíos y percepción opcional.
 
 ## Alcance metodológico
 
